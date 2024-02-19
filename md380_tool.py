@@ -15,6 +15,7 @@ import struct
 import sys
 import time
 import usb.core
+import usb.backend.libusb1
 from collections import namedtuple
 
 from DFU import DFU, Request, State
@@ -690,8 +691,10 @@ def readword(dfu, address):
 
 
 def init_dfu(alt=0):
+    backend = usb.backend.libusb1.get_backend(find_library=lambda x: "/opt/local/lib/libusb.dylib")
     dev = usb.core.find(idVendor=md380_vendor,
-                        idProduct=md380_product)
+                        idProduct=md380_product,
+                        backend=backend)
 
     if dev is None:
         raise RuntimeError('Device not found')

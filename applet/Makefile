@@ -105,6 +105,7 @@ ROOT=$(shell pwd)
 
 CFLAGS += -Iinc -Ilib -Ilib/inc -I.
 CFLAGS += -Ilib/inc/core -Ilib/inc/peripherals
+CFLAGS += -fcommon --specs=nosys.specs
 CFLAGS += -D "MD380_$(subst .,_,$(SRCVERSION))"  # ISO C99 requires whitespace after
 
 # DL4YHF: Had to modify the name of the startup file, because it was 
